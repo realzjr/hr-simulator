@@ -1,0 +1,258 @@
+/**
+ * 模式切换 + API Key 弹窗样式
+ */
+
+/* ===== 模式切换区 ===== */
+.mode-toggle-section {
+  text-align: center;
+  margin-bottom: 18px;
+}
+
+.mode-toggle {
+  display: inline-flex;
+  background: #e8f5e9;
+  border-radius: 12px;
+  padding: 3px;
+  gap: 2px;
+  border: 1px solid #c8e6c9;
+}
+
+.mode-btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.mode-btn:hover {
+  color: #374151;
+  background: rgba(0,0,0,0.05);
+}
+
+.mode-btn.active {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(22,163,74,0.3);
+}
+
+.mode-hint {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--text-light);
+  transition: opacity 0.3s;
+}
+
+/* ===== API Key 配置弹窗 ===== */
+.api-modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.api-modal-overlay.visible {
+  display: flex;
+}
+
+.api-modal {
+  background: #1e1e2e;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 28px 24px;
+  width: 420px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+  animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.api-modal-header {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.api-modal label {
+  display: block;
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 6px;
+  margin-top: 14px;
+}
+
+.api-modal label:first-of-type {
+  margin-top: 0;
+}
+
+/* ── 供应商选择网格 ── */
+.api-provider-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.api-provider-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.04);
+  color: rgba(255,255,255,0.6);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.api-provider-btn:hover {
+  background: rgba(99,102,241,0.1);
+  border-color: rgba(99,102,241,0.3);
+}
+
+.api-provider-btn.active {
+  background: rgba(99,102,241,0.15);
+  border-color: rgba(99,102,241,0.5);
+  color: #fff;
+  box-shadow: 0 0 8px rgba(99,102,241,0.2);
+}
+
+.api-provider-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.api-provider-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 自定义按钮横跨两列 */
+.api-provider-btn-wide {
+  grid-column: 1 / -1;
+}
+
+/* 自定义配置字段区 */
+.api-custom-fields {
+  margin-top: 4px;
+}
+
+.api-custom-fields label {
+  margin-top: 8px !important;
+}
+
+.api-model-hint {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  margin-top: 6px;
+  min-height: 16px;
+}
+
+.api-custom-url-row {
+  margin-top: 4px;
+}
+
+.api-custom-url-row label {
+  margin-top: 8px !important;
+}
+
+.api-modal input[type="password"],
+.api-modal input[type="text"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.api-modal input:focus {
+  border-color: rgba(99,102,241,0.6);
+}
+
+.api-modal input::placeholder {
+  color: rgba(255,255,255,0.3);
+}
+
+.api-modal-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+}
+
+.api-modal-check input[type="checkbox"] {
+  accent-color: #6366f1;
+  width: 16px;
+  height: 16px;
+}
+
+.api-modal-check label {
+  margin: 0;
+  cursor: pointer;
+}
+
+.api-modal-footer {
+  display: flex;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.api-modal-footer .btn {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+
+.api-modal-footer .btn-outline {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.api-modal-footer .btn-outline:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+.api-modal-footer .btn-primary {
+  background: #6366f1;
+  color: #fff;
+}
+
+.api-modal-footer .btn-primary:hover {
+  background: #5558e6;
+}
+
+/* （本地模式组件现在直接 display:none，不再需要 disabled-local 样式） */

@@ -1,0 +1,201 @@
+/* ===== CSS变量 & Reset — 浅绿主题 ===== */
+:root {
+  --bg: #f0f9f4;
+  --card-bg: #ffffff;
+  --text: #1a2e1a;
+  --text-light: #6b8f6b;
+  --accent: #16a34a;
+  --accent-hover: #15803d;
+  --accent-light: #dcfce7;
+  --danger: #dc2626;
+  --danger-hover: #b91c1c;
+  --success: #059669;
+  --border: #c6e7c6;
+  --radius: 12px;
+  --shadow: 0 2px 12px rgba(22,100,50,0.08);
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* ===== 公共类 ===== */
+.scene {
+  display: none;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.scene.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background: var(--danger-hover);
+}
+
+.btn-secondary {
+  background: #f0fdf4;
+  color: var(--text);
+  border: 2px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background: #dcfce7;
+  border-color: var(--accent);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+}
+
+.btn-outline:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  width: 100%;
+}
+
+.tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  background: var(--accent-light);
+  color: var(--accent);
+  margin: 2px;
+}
+
+/* ===== Loading ===== */
+.btn.loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.loading-text {
+  color: var(--text-light) !important;
+  font-style: italic;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.loading-text {
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ===== 强制毕业预警 toast ===== */
+.force-warning-toast {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: linear-gradient(135deg, #991b1b, #dc2626);
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 24px;
+  line-height: 1.6;
+  box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4);
+  transform: translateY(-100%);
+  animation: forceWarningSlide 4s ease forwards;
+}
+
+@keyframes forceWarningSlide {
+  0% { transform: translateY(-100%); }
+  8% { transform: translateY(0); }
+  85% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+
+/* ===== 刘海屏安全区 ===== */
+.scene {
+  padding-top: calc(24px + env(safe-area-inset-top, 0px));
+  padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  padding-left: calc(16px + env(safe-area-inset-left, 0px));
+  padding-right: calc(16px + env(safe-area-inset-right, 0px));
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 374px) {
+  .scene { padding-top: calc(16px + env(safe-area-inset-top, 0px)); padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)); padding-left: calc(10px + env(safe-area-inset-left, 0px)); padding-right: calc(10px + env(safe-area-inset-right, 0px)); }
+  .card { padding: 16px; }
+  .btn { padding: 10px 20px; font-size: 14px; }
+}
+
+@media (min-width: 375px) and (max-width: 599px) {
+  .scene { max-width: 500px; }
+  .card { padding: 20px; }
+}
+
+@media (min-width: 600px) {
+  .scene { max-width: 520px; }
+}

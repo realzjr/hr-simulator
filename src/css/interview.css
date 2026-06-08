@@ -1,0 +1,648 @@
+/* ===== 面试页 — 面对面场景 ===== */
+#scene-interview {
+  gap: 12px;
+}
+
+.interview-header {
+  text-align: center;
+  width: 100%;
+}
+
+.interview-header h2 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.interview-progress {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+
+/* ── 面试场景区 — 面试间 ── */
+.interview-scene {
+  width: 100%;
+  height: 220px;
+  min-height: 220px;
+  max-height: 220px;
+  background: url('../images/interview-room.svg') center center / cover no-repeat;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── 面试工具栏（跳过/终止，独立于场景卡片上方） ── */
+.interview-toolbar-bar {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  width: 100%;
+}
+
+.toolbar-btn-wrap {
+  position: relative;
+}
+
+.toolbar-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 6px;
+  padding: 4px 10px;
+  background: var(--text);
+  color: #fff;
+  font-size: 11px;
+  border-radius: 6px;
+  white-space: nowrap;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.toolbar-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid var(--text);
+}
+
+.toolbar-btn-wrap:hover .toolbar-tooltip {
+  display: block;
+}
+
+.toolbar-icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: var(--card-bg);
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  padding: 0;
+  line-height: 1;
+}
+
+.toolbar-icon-btn:hover {
+  background: var(--accent-light);
+  border-color: var(--accent);
+  transform: scale(1.1);
+}
+
+.toolbar-icon-btn:active {
+  transform: scale(0.95);
+}
+
+.toolbar-icon-btn.btn-end:hover {
+  background: #fef2f2;
+  border-color: #ef4444;
+}
+
+/* 两人对坐区 — 绝对定位在椅子上 */
+.scene-persons {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* 人物列 */
+.person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80px;
+  position: absolute;
+  pointer-events: auto;
+}
+
+/* 面试官 — 左椅 (SVG左椅中心≈14%, 座面≈63%) */
+.person-left {
+  left: 8%;
+  bottom: 18%;
+}
+
+/* 候选人 — 右椅 (SVG右椅中心≈83%, 座面≈63%) */
+.person-right {
+  right: 5%;
+  bottom: 18%;
+}
+
+.person-label {
+  font-size: 11px;
+  color: #fff;
+  margin-top: 4px;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.person-name {
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 2px;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+/* 面试官头像（带动效） */
+.interviewer-avatar-large {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #f0fdf4;
+  border: 2.5px solid var(--accent);
+  position: relative;
+  animation: hr-float 3s ease-in-out infinite;
+  box-shadow: 0 0 0 0 rgba(22,163,74,0.3);
+}
+
+.interviewer-avatar-large::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: conic-gradient(from 0deg, var(--accent), transparent 40%, transparent 60%, var(--accent)) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: hr-ring-spin 4s linear infinite;
+  opacity: 0.6;
+}
+
+.interviewer-avatar-large img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* HR 徽章（外置在圆框右下角） */
+.interviewer-badge {
+  position: absolute;
+  bottom: -4px;
+  right: -6px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 8px;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+  border: 2px solid #fff;
+  z-index: 2;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+
+@keyframes hr-float {
+  0%, 100% { transform: translateY(0); box-shadow: 0 2px 8px rgba(22,163,74,0.15); }
+  50% { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(22,163,74,0.25); }
+}
+
+@keyframes hr-ring-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── 说话时头像缩放动效 ── */
+@keyframes avatar-speaking {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+
+.interviewer-avatar-large.speaking {
+  animation: avatar-speaking 0.5s ease-in-out infinite;
+}
+
+.candidate-avatar-large.speaking {
+  animation: avatar-speaking 0.5s ease-in-out infinite;
+}
+
+/* ── 头像加载渐显 ── */
+.avatar-fade-img {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.avatar-fade-img.loaded {
+  opacity: 1;
+}
+
+/* 候选人头像 */
+.candidate-avatar-large {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2.5px solid var(--text);
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.candidate-avatar-large img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 桌子区域（背景图已含桌子，仅保留布局占位） */
+.interview-desk {
+  display: none;
+}
+
+/* ── 对话气泡区 — 独立可滚动聊天区 ── */
+.bubble-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 8px;
+  width: 100%;
+  max-height: 240px;
+  min-height: 80px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(6px);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.04);
+}
+
+/* 气泡区滚动条样式 */
+.bubble-area::-webkit-scrollbar {
+  width: 4px;
+}
+
+.bubble-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.bubble-area::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+
+.bubble-area::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.bubble-col {
+  display: contents;
+}
+
+.speech-bubble {
+  position: relative;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.6;
+  max-width: 72%;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.35s, transform 0.35s;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.speech-bubble.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 面试官气泡 — 左侧绿色 */
+.bubble-interviewer {
+  background: rgba(240, 253, 244, 0.95);
+  border: 1.5px solid #86efac;
+  color: #14532d;
+  align-self: flex-start;
+}
+
+.bubble-interviewer::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: -7px;
+  transform: none;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-right: 7px solid #86efac;
+  border-left: none;
+}
+
+.bubble-interviewer::after {
+  content: '';
+  position: absolute;
+  top: 13px;
+  left: -5px;
+  transform: none;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 6px solid rgba(240, 253, 244, 0.95);
+  border-left: none;
+}
+
+/* 候选人气泡 — 右侧灰色 */
+.bubble-candidate {
+  background: rgba(249, 250, 251, 0.95);
+  border: 1.5px solid #d1d5db;
+  color: var(--text);
+  align-self: flex-end;
+}
+
+.bubble-candidate::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  right: -7px;
+  left: auto;
+  transform: none;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 7px solid #d1d5db;
+  border-right: none;
+}
+
+.bubble-candidate::after {
+  content: '';
+  position: absolute;
+  top: 13px;
+  right: -5px;
+  left: auto;
+  transform: none;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 6px solid rgba(249, 250, 251, 0.95);
+  border-right: none;
+}
+
+/* 思考中动画 */
+.bubble-thinking {
+  font-style: italic;
+  color: var(--text-light);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+/* ── 底部操作区 ── */
+.interview-controls {
+  width: 100%;
+}
+
+/* 问题进度（内联在候选人进度中） */
+#question-number {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.interview-current-question {
+  width: 100%;
+}
+
+.interview-q-btn {
+  width: 100%;
+  text-align: left;
+  padding: 14px 18px;
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.interview-q-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+
+.interview-q-btn.asked {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.interview-q-btn.ai-question {
+  border-style: dashed;
+  border-color: var(--accent);
+}
+
+.interview-q-btn.loading-text {
+  color: var(--text-light);
+  cursor: wait;
+}
+
+/* 三选一问题区 */
+.interview-q-choices-label {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.interview-q-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.interview-q-choices .interview-q-btn {
+  font-size: 14px;
+  padding: 12px 16px;
+}
+
+/* 面试完成 */
+.interview-done-msg {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-light);
+  padding: 16px;
+}
+
+.interview-next-btn {
+  margin-top: 8px;
+  width: 100%;
+  display: none;
+}
+
+.interview-next-btn.visible {
+  display: inline-flex;
+}
+
+/* ── 面试官回应选择器 ── */
+.response-picker {
+  display: none;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.response-picker.visible {
+  display: block;
+}
+
+.response-picker-label {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-bottom: 6px;
+}
+
+.response-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.response-option {
+  width: 100%;
+  padding: 10px 16px;
+  background: #f0fdf4;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.response-option:hover {
+  background: var(--accent-light);
+  border-color: var(--accent);
+}
+
+.response-option:active {
+  transform: scale(0.98);
+}
+
+/* ── 候选人提问环节 ── */
+.counter-question-section {
+  width: 100%;
+}
+
+.counter-question-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.counter-question-text {
+  font-size: 14px;
+  color: var(--text);
+  padding: 10px 14px;
+  background: #f9fafb;
+  border: 1.5px solid #d1d5db;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.counter-answer-label {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.counter-answers {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.counter-answer-btn {
+  width: 100%;
+  text-align: left;
+  padding: 12px 16px;
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.counter-answer-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+
+.counter-answer-btn.selected-good {
+  border-color: #16a34a;
+  background: #f0fdf4;
+}
+
+.counter-answer-btn.selected-mid {
+  border-color: #f59e0b;
+  background: #fffbeb;
+}
+
+.counter-answer-btn.selected-bad {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+.counter-answer-btn.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.counter-score-hint {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.counter-score-hint.good {
+  color: #16a34a;
+  background: #f0fdf4;
+}
+
+.counter-score-hint.mid {
+  color: #f59e0b;
+  background: #fffbeb;
+}
+
+.counter-score-hint.bad {
+  color: #ef4444;
+  background: #fef2f2;
+}
+
+/* ── 面试中查看简历模态 ── */
+#scene-interview .resume-modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 24px 16px;
+  overflow-y: auto;
+}
+
+#scene-interview .resume-modal-overlay.visible {
+  display: flex;
+}
+
+/* 小屏适配 */
+@media (max-width: 374px) {
+  .interview-scene { height: 180px; min-height: 180px; max-height: 180px; }
+  .bubble-area { max-height: 180px; }
+  .interviewer-avatar-large { width: 48px; height: 48px; }
+  .candidate-avatar-large { width: 44px; height: 44px; }
+}

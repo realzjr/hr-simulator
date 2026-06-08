@@ -1,0 +1,592 @@
+/* ===== 结果页样式 ===== */
+#scene-result {
+  gap: 20px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.result-title {
+  font-size: 24px;
+  font-weight: 800;
+  text-align: center;
+}
+
+/* 称号徽章 */
+.result-title-badge {
+  padding: 10px 28px;
+  border-radius: 24px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+  text-align: center;
+}
+
+.title-legendary { background: linear-gradient(135deg, #7c3aed, #a855f7); }
+.title-expert { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+.title-senior { background: linear-gradient(135deg, #16a34a, #22c55e); }
+.title-normal { background: #f59e0b; }
+.title-junior { background: #9ca3af; }
+.title-intern { background: #ef4444; }
+.title-graduated { background: linear-gradient(135deg, #991b1b, #ef4444); }
+
+.result-stat-graduated {
+  font-size: 18px;
+  color: #ef4444;
+}
+
+.share-card-graduated {
+  font-size: 28px !important;
+  color: #ef4444 !important;
+}
+
+.result-eval {
+  text-align: center;
+  font-size: 15px;
+  color: var(--text-light);
+  max-width: 320px;
+  line-height: 1.8;
+}
+
+.result-stats {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.result-stat-num {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.result-stat-label {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* 得分构成 */
+.result-score-breakdown {
+  width: 100%;
+}
+
+.result-score-breakdown h3,
+.result-candidates h3,
+.result-missed h3,
+.result-scoring-rules h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+/* 得分进度条 */
+.score-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+}
+
+.score-bar-row + .score-bar-row {
+  border-top: 1px solid #f0f0f0;
+}
+
+.score-bar-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.score-bar {
+  flex: 1;
+  height: 10px;
+  background: #e5e7eb;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.score-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 5px;
+  transition: width 0.6s ease;
+}
+
+.score-bar-num {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  min-width: 48px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.score-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 14px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.score-row.score-total {
+  font-weight: 700;
+  color: var(--accent);
+  border-bottom: none;
+  padding-top: 10px;
+}
+
+.score-val {
+  font-weight: 600;
+}
+
+/* 候选人反馈摘要卡片 */
+.result-candidates {
+  width: 100%;
+}
+
+.result-candidate-card {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.result-candidate-card:last-child {
+  border-bottom: none;
+}
+
+.rcc-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.rcc-header img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.rcc-name {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.rcc-ratings {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: #f59e0b;
+  margin-bottom: 4px;
+}
+
+.rcc-offer {
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.rcc-offer.offer-yes { color: var(--success); }
+.rcc-offer.offer-no { color: var(--text-light); }
+.rcc-offer.offer-rejected { color: #f59e0b; }
+.rcc-offer.offer-warning { color: #ef4444; }
+
+.score-row-penalty {
+  font-size: 12px;
+  color: #ef4444;
+}
+
+.rcc-score {
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.rcc-detail {
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+.result-hired-quality {
+  font-size: 11px;
+  margin-left: auto;
+}
+
+.quality-good { color: var(--success); }
+.quality-mid  { color: #f59e0b; }
+.quality-bad  { color: var(--danger); }
+
+/* 错过的优质候选人 */
+.result-missed {
+  width: 100%;
+}
+
+.result-missed-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.result-missed-item img {
+  width: 36px;
+  height: 36px;
+}
+
+.result-missed-item .result-hired-quality {
+  margin-left: auto;
+}
+
+/* 评分规则 */
+.result-scoring-rules {
+  width: 100%;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.result-scoring-rules .rule-item {
+  margin-bottom: 10px;
+}
+
+.result-scoring-rules ul {
+  margin-left: 16px;
+  color: var(--text-light);
+}
+
+.result-scoring-rules ul li {
+  margin: 2px 0;
+}
+
+/* 绩效周报按钮 */
+.result-weekly-report-btn {
+  width: 100%;
+}
+
+/* 分享卡片按钮 */
+.result-share-btn {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.result-restart-btn {
+  margin-top: 12px;
+  width: 100%;
+}
+
+/* ===== 分享卡片模态窗 ===== */
+.share-card-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 24px 16px;
+  overflow-y: auto;
+}
+
+.share-card-overlay.visible {
+  display: flex;
+}
+
+.share-card-modal {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 360px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.share-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.share-card-body {
+  padding: 20px;
+}
+
+.share-card-actions {
+  padding: 12px 20px 20px;
+}
+
+.share-card-actions .btn {
+  width: 100%;
+}
+
+/* 卡片内容 */
+.share-card {
+  position: relative;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(34,197,94,0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(59,130,246,0.06) 0%, transparent 50%),
+    linear-gradient(160deg, #f0fdf4 0%, #dcfce7 30%, #ecfdf5 60%, #d1fae5 100%);
+  border-radius: 20px;
+  padding: 32px 24px 28px;
+  text-align: center;
+  border: 2px solid #bbf7d0;
+  box-shadow: 0 2px 20px rgba(22,163,74,0.08), inset 0 1px 0 rgba(255,255,255,0.8);
+  overflow: hidden;
+}
+
+/* 四角装饰emoji */
+.share-card-deco {
+  position: absolute;
+  font-size: 20px;
+  opacity: 0.25;
+  pointer-events: none;
+}
+.share-card-deco-tl { top: 10px; left: 12px; }
+.share-card-deco-tr { top: 10px; right: 12px; }
+.share-card-deco-bl { bottom: 10px; left: 12px; }
+.share-card-deco-br { bottom: 10px; right: 12px; }
+
+.share-card-top {
+  margin-bottom: 12px;
+}
+
+.share-card-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: 3px;
+}
+
+.share-card-subtitle {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 4px;
+  letter-spacing: 2px;
+}
+
+.share-card-divider {
+  width: 60%;
+  height: 1px;
+  margin: 14px auto;
+  background: linear-gradient(90deg, transparent, #86efac, transparent);
+}
+
+.share-card-badge {
+  display: inline-block;
+  padding: 8px 28px;
+  border-radius: 24px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 6px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+  letter-spacing: 1px;
+}
+
+.share-card-score {
+  font-size: 44px;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 16px;
+  line-height: 1;
+}
+
+.share-card-score-unit {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+.share-card-stats-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 14px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 12px;
+  padding: 12px 8px;
+}
+
+.share-card-stat {
+  flex: 1;
+  text-align: center;
+}
+
+.share-card-stat-divider {
+  width: 1px;
+  height: 28px;
+  background: #d1d5db;
+  flex-shrink: 0;
+}
+
+.share-card-stat-num {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.share-card-stat-label {
+  font-size: 10px;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+/* 得分构成小摘要 */
+.share-card-breakdown {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.share-card-breakdown-item {
+  font-size: 11px;
+  color: var(--text-light);
+  background: rgba(255,255,255,0.5);
+  padding: 3px 10px;
+  border-radius: 10px;
+}
+
+/* QR码区域 */
+.share-card-qr-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.share-card-qr {
+  width: 80px;
+  height: 80px;
+  border-radius: 6px;
+  border: 2px solid #bbf7d0;
+  background: #fff;
+}
+
+.share-card-qr-hint {
+  font-size: 10px;
+  color: var(--text-light);
+  letter-spacing: 1px;
+}
+
+.share-card-footer {
+  font-size: 13px;
+  color: var(--text-light);
+  letter-spacing: 1px;
+}
+
+/* Bug反馈区域 */
+.result-feedback-section {
+  width: 100%;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.result-feedback-btn {
+  background: none;
+  color: var(--text-light);
+  font-size: 13px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+}
+
+.result-feedback-btn:hover {
+  color: var(--text);
+  background: #f3f4f6;
+}
+
+/* 日志查看器 */
+.log-viewer-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 24px 16px;
+  overflow-y: auto;
+}
+
+.log-viewer-overlay.visible {
+  display: flex;
+}
+
+.log-viewer {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 520px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.log-viewer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.log-viewer-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f3f4f6;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.log-viewer-close:hover {
+  background: #e5e7eb;
+}
+
+.log-viewer-actions {
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.log-copy-btn {
+  padding: 6px 16px;
+  font-size: 13px;
+}
+
+.log-viewer-body {
+  padding: 16px 20px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-y: auto;
+  max-height: 60vh;
+  font-family: 'SF Mono', 'Consolas', monospace;
+  background: #f9fafb;
+  margin: 0;
+}

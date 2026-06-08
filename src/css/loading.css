@@ -1,0 +1,384 @@
+/* ===== 简历收集加载场景 ===== */
+#scene-loading {
+  justify-content: center;
+  gap: 0;
+  padding-top: 0;
+  min-height: 100vh;
+}
+
+.loading-scene-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+
+/* 动画区域 */
+.loading-animation-area {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  margin: 0 auto;
+}
+
+/* === 招聘官头像 === */
+.recruiter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+/* === CSS绘制安卓机器人 === */
+.android-robot {
+  width: 72px;
+  height: 90px;
+  position: relative;
+  animation: robot-bounce 2s ease-in-out infinite;
+}
+
+@keyframes robot-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* 天线 */
+.robot-antenna {
+  width: 3px;
+  height: 12px;
+  background: #7cb342;
+  border-radius: 2px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  transform-origin: bottom center;
+  animation: antenna-wiggle 1.5s ease-in-out infinite;
+}
+
+.robot-antenna::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: #8bc34a;
+  border-radius: 50%;
+  position: absolute;
+  top: -3px;
+  left: -1.5px;
+}
+
+@keyframes antenna-wiggle {
+  0%, 100% { transform: translateX(-50%) rotate(0deg); }
+  25% { transform: translateX(-50%) rotate(-12deg); }
+  75% { transform: translateX(-50%) rotate(12deg); }
+}
+
+/* 头 */
+.robot-head {
+  width: 44px;
+  height: 26px;
+  background: linear-gradient(135deg, #8bc34a, #689f38);
+  border-radius: 22px 22px 6px 6px;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.robot-eye {
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  animation: robot-blink 3s ease-in-out infinite;
+}
+
+.robot-eye-left { left: 12px; }
+.robot-eye-right { right: 12px; }
+
+@keyframes robot-blink {
+  0%, 90%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+
+/* 身体 */
+.robot-body {
+  position: absolute;
+  top: 38px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 28px;
+}
+
+.robot-torso {
+  width: 40px;
+  height: 28px;
+  background: linear-gradient(135deg, #8bc34a, #689f38);
+  border-radius: 4px 4px 8px 8px;
+  position: relative;
+}
+
+.robot-torso::after {
+  content: '♥';
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+}
+
+/* 手臂 */
+.robot-arm {
+  width: 8px;
+  height: 22px;
+  background: #7cb342;
+  border-radius: 4px;
+  position: absolute;
+  top: 2px;
+}
+
+.robot-arm-left {
+  left: -12px;
+  transform-origin: top center;
+  animation: arm-wave-left 1.2s ease-in-out infinite;
+}
+
+.robot-arm-right {
+  right: -12px;
+  transform-origin: top center;
+  animation: arm-wave-right 1.2s ease-in-out infinite 0.6s;
+}
+
+@keyframes arm-wave-left {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-25deg); }
+}
+
+@keyframes arm-wave-right {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(25deg); }
+}
+
+/* 腿 */
+.robot-legs {
+  position: absolute;
+  top: 68px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.robot-leg {
+  width: 10px;
+  height: 14px;
+  background: #7cb342;
+  border-radius: 0 0 4px 4px;
+}
+
+/* === 飞来简历 === */
+.flying-resume {
+  position: absolute;
+  width: 28px;
+  height: 36px;
+  background: #fff;
+  border: 2px solid var(--border);
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  z-index: 5;
+}
+
+/* 假文字横线 */
+.flying-resume::before,
+.flying-resume::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  height: 2px;
+  background: var(--border);
+  border-radius: 1px;
+}
+.flying-resume::before { top: 8px; }
+.flying-resume::after { top: 14px; width: 60%; }
+
+/* 各方向飞来动画 */
+.flying-resume:nth-child(1) { animation: fly-from-left 2.5s ease-in-out infinite; }
+.flying-resume:nth-child(2) { animation: fly-from-right-top 2.8s ease-in-out infinite 0.3s; }
+.flying-resume:nth-child(3) { animation: fly-from-right 2.2s ease-in-out infinite 0.6s; }
+.flying-resume:nth-child(4) { animation: fly-from-left-bottom 3s ease-in-out infinite 0.9s; }
+.flying-resume:nth-child(5) { animation: fly-from-top 2.6s ease-in-out infinite 1.2s; }
+
+@keyframes fly-from-left {
+  0% { left: -20px; top: 100px; opacity: 0.9; transform: scale(1) rotate(-5deg); }
+  70% { left: 95px; top: 105px; opacity: 0.6; transform: scale(0.5) rotate(5deg); }
+  100% { left: 106px; top: 102px; opacity: 0; transform: scale(0.2) rotate(10deg); }
+}
+@keyframes fly-from-right-top {
+  0% { right: -20px; top: 10px; opacity: 0.9; transform: scale(1) rotate(8deg); }
+  70% { right: 85px; top: 90px; opacity: 0.6; transform: scale(0.5) rotate(-3deg); }
+  100% { right: 96px; top: 95px; opacity: 0; transform: scale(0.2) rotate(-8deg); }
+}
+@keyframes fly-from-right {
+  0% { right: -20px; top: 110px; opacity: 0.9; transform: scale(1) rotate(5deg); }
+  70% { right: 85px; top: 105px; opacity: 0.6; transform: scale(0.5) rotate(-5deg); }
+  100% { right: 96px; top: 102px; opacity: 0; transform: scale(0.2) rotate(-10deg); }
+}
+@keyframes fly-from-left-bottom {
+  0% { left: -10px; bottom: 10px; opacity: 0.9; transform: scale(1) rotate(-8deg); }
+  70% { left: 95px; bottom: 80px; opacity: 0.6; transform: scale(0.5) rotate(3deg); }
+  100% { left: 106px; bottom: 90px; opacity: 0; transform: scale(0.2) rotate(8deg); }
+}
+@keyframes fly-from-top {
+  0% { left: 106px; top: -20px; opacity: 0.9; transform: scale(1) rotate(3deg); }
+  70% { left: 106px; top: 85px; opacity: 0.6; transform: scale(0.5) rotate(-3deg); }
+  100% { left: 106px; top: 95px; opacity: 0; transform: scale(0.2) rotate(-6deg); }
+}
+
+/* === 提示文字 === */
+.loading-hint {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+/* === 进度条 === */
+.loading-progress-wrap {
+  width: 100%;
+  max-width: 320px;
+}
+
+.loading-progress-bar {
+  width: 100%;
+  height: 12px;
+  background: var(--accent-light);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.loading-progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 6px;
+  transition: width 0.4s ease;
+  width: 0%;
+}
+
+.loading-progress-text {
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-light);
+  margin-top: 8px;
+}
+
+/* === HR小知识轮播 === */
+.loading-tip-banner {
+  width: 100%;
+  max-width: 320px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tip-content {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 0;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.tip-content:empty {
+  padding: 0;
+}
+
+.tip-content.tip-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tip-content.tip-exiting {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.tip-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.tip-text {
+  font-size: 15px;
+  line-height: 1;
+  color: var(--text-light);
+}
+
+/* === 错误信息 === */
+.loading-errors {
+  width: 100%;
+  max-width: 320px;
+}
+
+.loading-error-box {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 13px;
+}
+
+.loading-error-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.loading-error-item {
+  color: var(--danger);
+  margin: 2px 0;
+}
+
+.loading-error-hint {
+  color: var(--text-light);
+  margin-top: 6px;
+  font-size: 12px;
+}
+
+/* === 重试/跳过按钮区 === */
+.loading-actions {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.loading-retry-btn {
+  width: 100%;
+}
+
+.loading-skip-btn {
+  width: 100%;
+}
+
+.loading-skip-hint {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-light);
+}

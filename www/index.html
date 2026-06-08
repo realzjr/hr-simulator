@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!--
+  HR模拟器
+  运行方式：需通过本地HTTP服务器访问，不可直接打开文件
+  启动命令：cd /Users/a123/HR模拟器 && python3 server.py
+  访问地址：http://localhost:8000
+  前置配置：将 DeepSeek API Key 写入 apikey.txt
+-->
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>HR模拟器</title>
+
+  <!-- 样式 -->
+  <link rel="stylesheet" href="css/base.css?v=25">
+  <link rel="stylesheet" href="css/intro.css?v=25">
+  <link rel="stylesheet" href="css/menu.css?v=25">
+  <link rel="stylesheet" href="css/modeToggle.css?v=25">
+  <link rel="stylesheet" href="css/resume.css?v=25">
+  <link rel="stylesheet" href="css/interview.css?v=26">
+  <link rel="stylesheet" href="css/feedback.css?v=25">
+  <link rel="stylesheet" href="css/result.css?v=25">
+  <link rel="stylesheet" href="css/loading.css?v=25">
+  <link rel="stylesheet" href="css/negotiation.css?v=25">
+  <link rel="stylesheet" href="css/hrdReview.css?v=25">
+</head>
+<body>
+
+  <!-- 引导页 -->
+  <div id="scene-intro" class="scene"></div>
+
+  <!-- 主菜单 -->
+  <div id="scene-menu" class="scene"></div>
+
+  <!-- 简历收集加载 -->
+  <div id="scene-loading" class="scene"></div>
+
+  <!-- 筛简历 -->
+  <div id="scene-resume" class="scene"></div>
+
+  <!-- 面试 -->
+  <div id="scene-interview" class="scene"></div>
+
+  <!-- 面试反馈表 -->
+  <div id="scene-feedback" class="scene"></div>
+
+  <!-- 谈薪 -->
+  <div id="scene-negotiation" class="scene"></div>
+
+  <!-- HRD评审 -->
+  <div id="scene-hrd-review" class="scene"></div>
+
+  <!-- 结果 -->
+  <div id="scene-result" class="scene"></div>
+
+  <!-- 方案B：内联诊断脚本，页面加载后自动测试API连通性 -->
+  <script>
+    window.__apiDiag = async function() {
+      const el = document.getElementById('menu-status');
+      const log = (msg) => { console.log('[诊断]', msg); if (el) el.textContent = msg; };
+      try {
+        log('诊断中：正在请求 /api/chat ...');
+        const resp = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: 'deepseek-chat',
+            messages: [{ role: 'user', content: '说OK' }],
+            temperature: 0.5,
+            max_tokens: 10,
+          }),
+        });
+        log('诊断中：HTTP ' + resp.status + '，正在读取body...');
+        const data = await resp.json();
+        if (data.choices) {
+          log('API 连通正常！回复：' + data.choices[0].message.content);
+        } else {
+          log('API 返回异常：' + JSON.stringify(data).substring(0, 100));
+        }
+      } catch (e) {
+        log('API 请求失败：' + e.message);
+        console.error('[诊断] 异常详情:', e);
+      }
+    };
+  </script>
+
+  <!-- CDN库 -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+
+  <!-- 数据池 -->
+  <script src="data/names.js?v=25"></script>
+  <script src="data/skills.js?v=25"></script>
+  <script src="data/experiences.js?v=25"></script>
+  <script src="data/educations.js?v=25"></script>
+  <script src="data/personalities.js?v=25"></script>
+  <script src="data/interviewQuestions.js?v=25"></script>
+  <script src="data/hrTips.js?v=25"></script>
+
+  <script src="data/evaluations.js?v=25"></script>
+  <script src="data/jobTemplates.js?v=25"></script>
+  <script src="data/prompts.js?v=25"></script>
+  <script src="data/localData.js?v=25"></script>
+  <script src="data/hrDialogue.js?v=25"></script>
+
+  <!-- 头像注册表 -->
+  <script src="avatars/avatarList.js?v=25"></script>
+
+  <!-- 功能模块 -->
+  <script src="js/api.js?v=25"></script>
+  <script src="js/state.js?v=25"></script>
+  <script src="js/scene.js?v=25"></script>
+  <script src="js/candidateFactory.js?v=25"></script>
+  <script src="js/menu.js?v=25"></script>
+  <script src="js/resumeRender.js?v=25"></script>
+  <script src="js/resumeInteract.js?v=25"></script>
+  <script src="js/interviewRender.js?v=26"></script>
+  <script src="js/interviewLogic.js?v=25"></script>
+  <script src="js/feedbackRender.js?v=25"></script>
+  <script src="js/feedbackLogic.js?v=25"></script>
+  <script src="js/negotiationRender.js?v=25"></script>
+  <script src="js/negotiationLogic.js?v=25"></script>
+  <script src="js/loadingRender.js?v=25"></script>
+  <script src="js/hrdReviewRender.js?v=25"></script>
+  <script src="js/introRender.js?v=25"></script>
+  <script src="js/resultLogic.js?v=25"></script>
+  <script src="js/resultRender.js?v=25"></script>
+  <script src="js/main.js?v=25"></script>
+
+</body>
+</html>

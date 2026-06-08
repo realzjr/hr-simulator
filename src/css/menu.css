@@ -1,0 +1,354 @@
+/* ===== 主菜单页样式 ===== */
+#scene-menu {
+  justify-content: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.menu-title {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--text);
+}
+
+.menu-subtitle {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-top: 8px;
+}
+
+.menu-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  border: 3px solid var(--text);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+}
+
+/* ===== HR角色信息栏 ===== */
+.menu-profile-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  font-size: 14px;
+}
+
+.menu-profile-info {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.menu-profile-change {
+  border: none;
+  background: none;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 13px;
+  font-family: inherit;
+  padding: 2px 6px;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+
+.menu-profile-change:hover {
+  background: rgba(22,163,74,0.08);
+}
+
+.menu-jd-section {
+  width: 100%;
+  text-align: left;
+}
+
+.menu-jd-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+.menu-jd-select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  background: var(--card-bg);
+  color: var(--text);
+  appearance: auto;
+}
+
+.menu-jd-select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.menu-jd-divider {
+  text-align: center;
+  margin: 12px 0;
+  font-size: 12px;
+  color: var(--text-light);
+  position: relative;
+}
+
+.menu-jd-divider::before,
+.menu-jd-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 25%;
+  height: 1px;
+  background: var(--border);
+}
+
+.menu-jd-divider::before { left: 0; }
+.menu-jd-divider::after { right: 0; }
+
+/* 关键词面板 */
+.jd-keywords-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.jd-kw-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.jd-kw-label {
+  font-size: 12px;
+  color: var(--text-light);
+  min-width: 36px;
+  font-weight: 600;
+}
+
+.jd-keyword-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  background: #f0f0f0;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+}
+
+.jd-keyword-tag:hover {
+  background: var(--accent-light);
+}
+
+.jd-keyword-tag.selected {
+  background: var(--accent);
+  color: #fff;
+}
+
+.jd-kw-custom-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.jd-kw-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: inherit;
+}
+
+.jd-kw-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.jd-generate-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.jd-generate-btn {
+  flex: 1;
+  white-space: nowrap;
+  padding: 8px 16px;
+  font-size: 13px;
+}
+
+.menu-jd-textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: inherit;
+  line-height: 1.6;
+  resize: vertical;
+  background: var(--card-bg);
+  color: var(--text);
+  min-height: 100px;
+}
+
+.menu-jd-textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* 本地模式只读预览 */
+.menu-jd-preview {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: inherit;
+  line-height: 1.7;
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  color: var(--text);
+  min-height: 80px;
+  white-space: pre-wrap;
+  box-sizing: border-box;
+}
+
+.menu-jd-preview:empty::before {
+  content: '请先选择预设岗位';
+  color: var(--text-light);
+  font-style: italic;
+}
+
+.menu-start-btn {
+  padding: 16px 48px;
+  font-size: 18px;
+  width: 100%;
+}
+
+.menu-status {
+  font-size: 13px;
+  color: var(--text-light);
+  min-height: 20px;
+}
+
+/* ── 候选人数量选择器 ── */
+.menu-count-section {
+  margin-top: 14px;
+}
+
+.count-picker {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
+  margin: 8px 0;
+}
+
+.count-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--card-bg);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.count-btn:hover {
+  background: var(--accent-light);
+  border-color: var(--accent);
+}
+
+.count-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--accent);
+  min-width: 32px;
+  text-align: center;
+}
+
+.count-hint {
+  font-size: 11px;
+  color: var(--text-light);
+  text-align: center;
+}
+
+/* ── 进度条 ── */
+.menu-progress-bar-wrap {
+  width: 100%;
+}
+
+.menu-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.menu-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), #22c55e);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+.menu-progress-text {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 6px;
+  text-align: center;
+}
+
+/* ── 错误信息 ── */
+.menu-errors {
+  width: 100%;
+}
+
+.menu-error-box {
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  border-radius: 8px;
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.menu-error-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--danger);
+  margin-bottom: 6px;
+}
+
+.menu-error-item {
+  font-size: 12px;
+  color: #7f1d1d;
+  line-height: 1.5;
+}
+
+.menu-error-hint {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-top: 6px;
+  font-style: italic;
+}

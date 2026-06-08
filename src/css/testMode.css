@@ -1,0 +1,242 @@
+/* ── 测试模式浮动面板 ── */
+
+.test-mode-panel {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  width: 220px;
+  background: rgba(30, 30, 40, 0.95);
+  border: 1px solid rgba(139, 92, 246, 0.5);
+  border-radius: 12px;
+  color: #e2e8f0;
+  font-size: 12px;
+  z-index: 9999;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+}
+
+.test-mode-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(139, 92, 246, 0.2);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+  cursor: default;
+}
+
+.test-mode-panel-title {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.test-mode-panel-toggle {
+  background: none;
+  border: none;
+  color: #a78bfa;
+  font-size: 16px;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.test-mode-panel-toggle:hover {
+  background: rgba(139, 92, 246, 0.2);
+}
+
+.test-mode-panel-body {
+  padding: 8px 12px;
+  max-height: 400px;
+  overflow-y: auto;
+  transition: max-height 0.3s ease, padding 0.3s ease, opacity 0.3s ease;
+}
+
+.test-mode-panel-body.collapsed {
+  max-height: 0;
+  padding: 0 12px;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.test-mode-section {
+  margin-bottom: 8px;
+}
+
+.test-mode-section label {
+  display: block;
+  font-size: 11px;
+  color: #94a3b8;
+  margin-bottom: 4px;
+}
+
+.test-mode-scene-nav {
+  display: flex;
+  gap: 4px;
+}
+
+.test-mode-scene-nav select {
+  flex: 1;
+  padding: 4px 6px;
+  border-radius: 6px;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  background: rgba(15, 15, 25, 0.8);
+  color: #e2e8f0;
+  font-size: 12px;
+  outline: none;
+}
+
+.test-mode-btn {
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  background: rgba(139, 92, 246, 0.15);
+  color: #c4b5fd;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.test-mode-btn:hover:not(:disabled) {
+  background: rgba(139, 92, 246, 0.3);
+}
+
+.test-mode-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.test-mode-btn-rewind {
+  width: 100%;
+}
+
+/* ── 录制进度 ── */
+
+.test-mode-completeness {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.tm-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.tm-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tm-dot-ok {
+  background: #22c55e;
+  box-shadow: 0 0 4px rgba(34, 197, 94, 0.5);
+}
+
+.tm-dot-no {
+  background: #ef4444;
+  box-shadow: 0 0 4px rgba(239, 68, 68, 0.3);
+}
+
+.tm-label {
+  flex: 1;
+  color: #cbd5e1;
+}
+
+.tm-count {
+  color: #94a3b8;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 结算页保存区域 ── */
+
+.test-mode-save-section {
+  margin-top: 24px;
+  padding: 20px;
+  background: rgba(139, 92, 246, 0.08);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 12px;
+}
+
+.tm-save-header {
+  font-size: 16px;
+  font-weight: 600;
+  color: #c4b5fd;
+  margin-bottom: 12px;
+}
+
+.tm-save-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.tm-save-table th {
+  text-align: left;
+  padding: 6px 8px;
+  background: rgba(139, 92, 246, 0.15);
+  color: #a78bfa;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.tm-save-table td {
+  padding: 5px 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: #cbd5e1;
+}
+
+.tm-save-status {
+  font-size: 14px;
+  padding: 8px 0;
+  margin-bottom: 12px;
+}
+
+.tm-save-buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tm-save-msg {
+  margin-top: 8px;
+  font-size: 13px;
+  min-height: 20px;
+}
+
+.tm-save-ok {
+  color: #22c55e;
+}
+
+.tm-save-err {
+  color: #ef4444;
+}
+
+/* ── 测试模式边框指示器 ── */
+
+body.test-mode-active {
+  outline: 2px solid rgba(139, 92, 246, 0.4);
+  outline-offset: -2px;
+}
+
+/* ── 菜单页测试模式按钮 ── */
+
+.test-mode-menu-btn {
+  margin-top: 8px;
+  border-color: rgba(139, 92, 246, 0.4) !important;
+  color: #a78bfa !important;
+}
+
+.test-mode-menu-btn:hover {
+  background: rgba(139, 92, 246, 0.1) !important;
+}

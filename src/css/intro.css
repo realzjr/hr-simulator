@@ -1,0 +1,595 @@
+/* ===== 引导页场景 ===== */
+#scene-intro {
+  justify-content: center;
+  gap: 0;
+  padding-top: 0;
+  min-height: 100vh;
+}
+
+.intro-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  cursor: pointer;
+}
+
+/* ===== HR魔法动画区 ===== */
+.intro-magic-area {
+  position: relative;
+  width: 240px;
+  height: 220px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* ----------------------------------------
+   时间轴（9s循环）：
+   0-10%   HR+魔法棒从左下方入场
+   10-18%  挥棒+火花
+   18-22%  HR+棒淡出消失
+   22-26%  烟花从中心爆炸 + 简历一起炸出
+   26-50%  烟花扩散 + 简历散开飞行
+   50-62%  浓烟翻滚上涌
+   62-72%  简历在烟中消失
+   72-88%  烟雾消散
+   88-100% 空场，准备下一轮
+   ---------------------------------------- */
+
+/* --- HR角色 — 左下方 --- */
+.intro-hr {
+  position: absolute;
+  bottom: 30px;
+  left: 28px;
+  font-size: 52px;
+  line-height: 1;
+  z-index: 10;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.12));
+  animation: hr-appear 9s ease-in-out infinite;
+}
+
+@keyframes hr-appear {
+  0%   { transform: scale(0) rotate(5deg); opacity: 0; }
+  5%   { transform: scale(1.1) rotate(-2deg); opacity: 1; }
+  8%   { transform: scale(1) rotate(0deg); opacity: 1; }
+  /* 挥棒 */
+  12%  { transform: scale(1) rotate(-3deg); opacity: 1; }
+  16%  { transform: scale(1) rotate(4deg); opacity: 1; }
+  18%  { transform: scale(1) rotate(0deg); opacity: 1; }
+  /* 烟花前消失 */
+  20%  { transform: scale(0.8) rotate(0deg); opacity: 0.5; }
+  22%  { transform: scale(0) rotate(0deg); opacity: 0; }
+  100% { transform: scale(0); opacity: 0; }
+}
+
+/* --- 魔法棒 — HR右手位置 --- */
+.intro-wand {
+  position: absolute;
+  bottom: 60px;
+  left: 78px;
+  font-size: 30px;
+  line-height: 1;
+  z-index: 11;
+  transform-origin: bottom left;
+  animation: wand-wave 9s ease-in-out infinite;
+}
+
+@keyframes wand-wave {
+  0%   { transform: rotate(0deg) scale(0); opacity: 0; }
+  5%   { transform: rotate(-30deg) scale(1); opacity: 1; }
+  8%   { transform: rotate(-15deg) scale(1); opacity: 1; }
+  /* 挥动 — 向右上方指向中心 */
+  12%  { transform: rotate(-50deg) scale(1); opacity: 1; }
+  15%  { transform: rotate(10deg) scale(1.15); opacity: 1; }
+  18%  { transform: rotate(-10deg) scale(1); opacity: 1; }
+  /* 消失 */
+  20%  { transform: rotate(-10deg) scale(0.6); opacity: 0.4; }
+  22%  { transform: rotate(0deg) scale(0); opacity: 0; }
+  100% { transform: rotate(0deg) scale(0); opacity: 0; }
+}
+
+/* --- 魔法火花（挥棒时的闪光） — 棒尖处 --- */
+.intro-spark {
+  position: absolute;
+  top: 55%;
+  left: 52%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fbbf24;
+  z-index: 12;
+  animation: spark-flash 9s ease-in-out infinite;
+}
+
+.intro-spark::before,
+.intro-spark::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: #fbbf24;
+}
+.intro-spark::before {
+  width: 6px; height: 6px;
+  top: -12px; left: 8px;
+  animation: spark-flash 9s ease-in-out infinite 0.08s;
+}
+.intro-spark::after {
+  width: 5px; height: 5px;
+  top: 4px; left: 14px;
+  animation: spark-flash 9s ease-in-out infinite 0.15s;
+}
+
+@keyframes spark-flash {
+  0%, 11% { transform: scale(0); opacity: 0; }
+  14%     { transform: scale(2.5); opacity: 1; }
+  18%     { transform: scale(3.5); opacity: 0.9; }
+  22%     { transform: scale(0); opacity: 0; }
+  100%    { transform: scale(0); opacity: 0; }
+}
+
+/* ============ 烟花系统 ============ */
+
+/* 烟花爆心 — 靠近中央，略偏棒尖方向 */
+.intro-firework-origin {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  z-index: 8;
+}
+
+/* --- 烟花层1（主烟花） --- */
+.intro-firework-layer {
+  position: absolute;
+  top: 0; left: 0;
+  width: 0; height: 0;
+}
+
+.intro-fw-layer-1 {
+  animation: fw-burst 9s ease-out infinite;
+}
+.intro-fw-layer-2 {
+  animation: fw-burst 9s ease-out infinite 0.12s;
+}
+.intro-fw-layer-3 {
+  animation: fw-burst-spin 9s ease-out infinite 0.06s;
+}
+
+@keyframes fw-burst {
+  0%, 21% { transform: scale(0); opacity: 0; }
+  24%     { transform: scale(0.5); opacity: 1; }
+  30%     { transform: scale(1); opacity: 0.85; }
+  40%     { transform: scale(1.6); opacity: 0.2; }
+  46%     { transform: scale(1.8); opacity: 0; }
+  100%    { transform: scale(0); opacity: 0; }
+}
+
+@keyframes fw-burst-spin {
+  0%, 21% { transform: scale(0) rotate(0deg); opacity: 0; }
+  24%     { transform: scale(0.4) rotate(15deg); opacity: 1; }
+  30%     { transform: scale(1.1) rotate(45deg); opacity: 0.8; }
+  40%     { transform: scale(1.7) rotate(90deg); opacity: 0.15; }
+  46%     { transform: scale(2) rotate(120deg); opacity: 0; }
+  100%    { transform: scale(0) rotate(0deg); opacity: 0; }
+}
+
+/* 烟花粒子 — 通用 */
+.intro-fw-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  animation: fw-dot-fly 9s ease-out infinite;
+}
+
+@keyframes fw-dot-fly {
+  0%, 21% { transform: translate(0, 0) scale(0); opacity: 0; }
+  24%     { transform: translate(0, 0) scale(1.8); opacity: 1; }
+  34%     { transform: translate(var(--dx), var(--dy)) scale(1); opacity: 0.8; }
+  44%     { transform: translate(calc(var(--dx)*1.4), calc(var(--dy)*1.4)) scale(0.2); opacity: 0; }
+  100%    { transform: translate(0, 0) scale(0); opacity: 0; }
+}
+
+/* 层1粒子（8颗 主圈） */
+.intro-fw-layer-1 .intro-fw-dot:nth-child(1)  { background:#ef4444; --dx:0px;   --dy:-75px; }
+.intro-fw-layer-1 .intro-fw-dot:nth-child(2)  { background:#f59e0b; --dx:53px;  --dy:-53px; animation-delay:0.04s; }
+.intro-fw-layer-1 .intro-fw-dot:nth-child(3)  { background:#10b981; --dx:75px;  --dy:0px;   animation-delay:0.08s; }
+.intro-fw-layer-1 .intro-fw-dot:nth-child(4)  { background:#3b82f6; --dx:53px;  --dy:53px;  animation-delay:0.04s; }
+.intro-fw-layer-1 .intro-fw-dot:nth-child(5)  { background:#a855f7; --dx:0px;   --dy:75px;  }
+.intro-fw-layer-1 .intro-fw-dot:nth-child(6)  { background:#ec4899; --dx:-53px; --dy:53px;  animation-delay:0.04s; }
+.intro-fw-layer-1 .intro-fw-dot:nth-child(7)  { background:#f97316; --dx:-75px; --dy:0px;   animation-delay:0.08s; }
+.intro-fw-layer-1 .intro-fw-dot:nth-child(8)  { background:#14b8a6; --dx:-53px; --dy:-53px; animation-delay:0.04s; }
+
+/* 层2粒子（8颗 旋转偏移22.5°，较小） */
+.intro-fw-layer-2 .intro-fw-dot { width:5px; height:5px; }
+.intro-fw-layer-2 .intro-fw-dot:nth-child(1)  { background:#fbbf24; --dx:28px;  --dy:-68px; }
+.intro-fw-layer-2 .intro-fw-dot:nth-child(2)  { background:#ef4444; --dx:68px;  --dy:-28px; animation-delay:0.06s; }
+.intro-fw-layer-2 .intro-fw-dot:nth-child(3)  { background:#6366f1; --dx:68px;  --dy:28px;  animation-delay:0.03s; }
+.intro-fw-layer-2 .intro-fw-dot:nth-child(4)  { background:#f43f5e; --dx:28px;  --dy:68px;  animation-delay:0.06s; }
+.intro-fw-layer-2 .intro-fw-dot:nth-child(5)  { background:#84cc16; --dx:-28px; --dy:68px;  }
+.intro-fw-layer-2 .intro-fw-dot:nth-child(6)  { background:#06b6d4; --dx:-68px; --dy:28px;  animation-delay:0.06s; }
+.intro-fw-layer-2 .intro-fw-dot:nth-child(7)  { background:#d946ef; --dx:-68px; --dy:-28px; animation-delay:0.03s; }
+.intro-fw-layer-2 .intro-fw-dot:nth-child(8)  { background:#fb923c; --dx:-28px; --dy:-68px; animation-delay:0.06s; }
+
+/* 层3粒子（6颗 拖尾长条，旋转） */
+.intro-fw-layer-3 .intro-fw-dot {
+  width: 4px; height: 10px; border-radius: 3px;
+}
+.intro-fw-layer-3 .intro-fw-dot:nth-child(1) { background:#ef4444; --dx:0px;   --dy:-85px; transform-origin:center; }
+.intro-fw-layer-3 .intro-fw-dot:nth-child(2) { background:#fbbf24; --dx:74px;  --dy:-42px; animation-delay:0.05s; }
+.intro-fw-layer-3 .intro-fw-dot:nth-child(3) { background:#10b981; --dx:74px;  --dy:42px;  animation-delay:0.1s; }
+.intro-fw-layer-3 .intro-fw-dot:nth-child(4) { background:#3b82f6; --dx:0px;   --dy:85px;  }
+.intro-fw-layer-3 .intro-fw-dot:nth-child(5) { background:#a855f7; --dx:-74px; --dy:42px;  animation-delay:0.05s; }
+.intro-fw-layer-3 .intro-fw-dot:nth-child(6) { background:#ec4899; --dx:-74px; --dy:-42px; animation-delay:0.1s; }
+
+/* --- 烟花中心光晕（多层） --- */
+.intro-fw-glow {
+  position: absolute;
+  top: 0; left: 0;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+  pointer-events: none;
+}
+
+.intro-fw-glow-1 {
+  background: radial-gradient(circle, rgba(251,191,36,0.9) 0%, rgba(251,191,36,0) 70%);
+  animation: glow-pulse 9s ease-out infinite;
+}
+.intro-fw-glow-2 {
+  background: radial-gradient(circle, rgba(239,68,68,0.6) 0%, rgba(239,68,68,0) 70%);
+  animation: glow-pulse 9s ease-out infinite 0.1s;
+}
+.intro-fw-glow-3 {
+  background: radial-gradient(circle, rgba(168,85,247,0.5) 0%, rgba(168,85,247,0) 70%);
+  animation: glow-pulse-spin 9s ease-out infinite 0.05s;
+}
+
+@keyframes glow-pulse {
+  0%, 20% { transform: translate(-50%,-50%) scale(0); opacity: 0; }
+  23%     { transform: translate(-50%,-50%) scale(1); opacity: 1; }
+  28%     { transform: translate(-50%,-50%) scale(4); opacity: 0.7; }
+  38%     { transform: translate(-50%,-50%) scale(7); opacity: 0; }
+  100%    { transform: translate(-50%,-50%) scale(0); opacity: 0; }
+}
+
+@keyframes glow-pulse-spin {
+  0%, 20% { transform: translate(-50%,-50%) scale(0) rotate(0deg); opacity: 0; }
+  23%     { transform: translate(-50%,-50%) scale(1.5) rotate(30deg); opacity: 0.8; }
+  30%     { transform: translate(-50%,-50%) scale(5) rotate(90deg); opacity: 0.4; }
+  40%     { transform: translate(-50%,-50%) scale(8) rotate(180deg); opacity: 0; }
+  100%    { transform: translate(-50%,-50%) scale(0) rotate(0deg); opacity: 0; }
+}
+
+/* ============ 简历 — 随烟花一起炸出 ============ */
+.intro-resume-fly {
+  position: absolute;
+  top: 0; left: 0;
+  width: 22px;
+  height: 28px;
+  background: #fff;
+  border: 1.5px solid #d1d5db;
+  border-radius: 3px;
+  z-index: 9;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+}
+
+/* 简历上的横线装饰 */
+.intro-resume-fly::before {
+  content: '';
+  position: absolute;
+  top: 5px; left: 3px; right: 3px;
+  height: 2px;
+  background: #d1d5db;
+  box-shadow: 0 5px 0 #e5e7eb;
+}
+.intro-resume-fly::after {
+  content: '';
+  position: absolute;
+  top: 16px; left: 3px;
+  width: 55%; height: 2px;
+  background: #e5e7eb;
+}
+
+/* 5封简历各方向飞出 — 与烟花同步
+   在.intro-firework-origin中，简历是第7-11个子元素
+   (3 glow + 3 layer = 6，然后 5 resume) */
+.intro-firework-origin > :nth-child(7) {
+  --rx: -65px; --ry: -80px; --rr: -20deg; --rs: 1.3;
+  animation: resume-burst 9s ease-out infinite 0.02s;
+}
+.intro-firework-origin > :nth-child(8) {
+  --rx: 70px; --ry: -60px; --rr: 15deg; --rs: 1.15;
+  animation: resume-burst 9s ease-out infinite 0.08s;
+}
+.intro-firework-origin > :nth-child(9) {
+  --rx: 82px; --ry: 35px; --rr: 22deg; --rs: 1.4;
+  animation: resume-burst 9s ease-out infinite 0.12s;
+}
+.intro-firework-origin > :nth-child(10) {
+  --rx: -75px; --ry: 50px; --rr: -18deg; --rs: 1.25;
+  animation: resume-burst 9s ease-out infinite 0.06s;
+}
+.intro-firework-origin > :nth-child(11) {
+  --rx: 8px; --ry: 88px; --rr: 6deg; --rs: 1.1;
+  animation: resume-burst 9s ease-out infinite 0.15s;
+}
+
+@keyframes resume-burst {
+  /* 与烟花同时出现 */
+  0%, 21% {
+    transform: translate(-50%, -50%) scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  /* 从中心弹出 */
+  24% {
+    transform: translate(-50%, -50%) scale(0.5) rotate(calc(var(--rr)*0.3));
+    opacity: 1;
+  }
+  /* 飞到目标位置 */
+  35% {
+    transform: translate(calc(-50% + var(--rx)), calc(-50% + var(--ry))) scale(var(--rs)) rotate(var(--rr));
+    opacity: 1;
+  }
+  /* 停留展示 */
+  50% {
+    transform: translate(calc(-50% + var(--rx)), calc(-50% + var(--ry))) scale(var(--rs)) rotate(var(--rr));
+    opacity: 1;
+  }
+  /* 烟雾中渐淡 */
+  60% {
+    transform: translate(calc(-50% + var(--rx)*1.1), calc(-50% + var(--ry)*1.1)) scale(calc(var(--rs)*0.7)) rotate(var(--rr));
+    opacity: 0.3;
+  }
+  66% {
+    transform: translate(calc(-50% + var(--rx)*1.15), calc(-50% + var(--ry)*1.15)) scale(0.1) rotate(var(--rr));
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0) rotate(0deg);
+    opacity: 0;
+  }
+}
+
+/* ============ 浓烟效果（3层） ============ */
+.intro-smoke {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  border-radius: 50%;
+  z-index: 15;
+  pointer-events: none;
+}
+
+.intro-smoke-1 {
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle,
+    rgba(160,160,160,0.75) 0%,
+    rgba(180,180,180,0.5) 30%,
+    rgba(200,200,200,0.2) 55%,
+    transparent 75%);
+  animation: smoke-thick-1 9s ease-in-out infinite;
+}
+
+.intro-smoke-2 {
+  width: 170px;
+  height: 170px;
+  background: radial-gradient(circle,
+    rgba(140,140,140,0.65) 0%,
+    rgba(170,170,170,0.4) 35%,
+    rgba(200,200,200,0.15) 60%,
+    transparent 75%);
+  animation: smoke-thick-2 9s ease-in-out infinite;
+}
+
+.intro-smoke-3 {
+  width: 220px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse,
+    rgba(150,150,150,0.6) 0%,
+    rgba(180,180,180,0.35) 40%,
+    transparent 70%);
+  animation: smoke-thick-3 9s ease-in-out infinite;
+}
+
+@keyframes smoke-thick-1 {
+  0%, 46% { transform: translate(-50%, -50%) scale(0); opacity: 0; filter: blur(0); }
+  52%     { transform: translate(-50%, -50%) scale(0.5); opacity: 0.9; filter: blur(2px); }
+  58%     { transform: translate(-50%, -60%) scale(1); opacity: 0.95; filter: blur(4px); }
+  66%     { transform: translate(-50%, -70%) scale(1.5); opacity: 0.8; filter: blur(6px); }
+  75%     { transform: translate(-50%, -80%) scale(1.9); opacity: 0.4; filter: blur(10px); }
+  84%     { transform: translate(-50%, -90%) scale(2.2); opacity: 0.1; filter: blur(14px); }
+  90%     { transform: translate(-50%, -95%) scale(2.4); opacity: 0; filter: blur(16px); }
+  100%    { transform: translate(-50%, -50%) scale(0); opacity: 0; filter: blur(0); }
+}
+
+@keyframes smoke-thick-2 {
+  0%, 49% { transform: translate(-50%, -50%) scale(0); opacity: 0; filter: blur(0); }
+  55%     { transform: translate(-50%, -45%) scale(0.4); opacity: 0.85; filter: blur(3px); }
+  62%     { transform: translate(-40%, -55%) scale(1.1); opacity: 0.9; filter: blur(5px); }
+  70%     { transform: translate(-35%, -70%) scale(1.6); opacity: 0.6; filter: blur(8px); }
+  80%     { transform: translate(-30%, -85%) scale(2); opacity: 0.2; filter: blur(12px); }
+  88%     { transform: translate(-25%, -95%) scale(2.2); opacity: 0; filter: blur(14px); }
+  100%    { transform: translate(-50%, -50%) scale(0); opacity: 0; filter: blur(0); }
+}
+
+@keyframes smoke-thick-3 {
+  0%, 50% { transform: translate(-50%, -50%) scale(0); opacity: 0; filter: blur(0); }
+  56%     { transform: translate(-55%, -48%) scale(0.5); opacity: 0.8; filter: blur(2px); }
+  64%     { transform: translate(-60%, -60%) scale(1.2); opacity: 0.85; filter: blur(6px); }
+  72%     { transform: translate(-65%, -75%) scale(1.7); opacity: 0.5; filter: blur(9px); }
+  82%     { transform: translate(-68%, -88%) scale(2.1); opacity: 0.15; filter: blur(13px); }
+  90%     { transform: translate(-70%, -95%) scale(2.3); opacity: 0; filter: blur(16px); }
+  100%    { transform: translate(-50%, -50%) scale(0); opacity: 0; filter: blur(0); }
+}
+
+/* ===== 信纸展开 ===== */
+.intro-letter-wrap {
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out;
+}
+
+.intro-letter-wrap.open {
+  max-height: 800px;
+}
+
+.intro-letter-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  border-left: 4px solid var(--accent);
+}
+
+.intro-letter-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text);
+  text-align: center;
+}
+
+.intro-letter-body {
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--text);
+  min-height: 60px;
+  white-space: pre-wrap;
+}
+
+/* 点击提示 */
+.intro-tap-hint {
+  font-size: 13px;
+  color: var(--text-light);
+  text-align: center;
+  animation: intro-hint-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes intro-hint-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* ===== 性别选择按钮 ===== */
+.intro-gender-buttons {
+  display: none;
+  gap: 16px;
+  width: 100%;
+  max-width: 320px;
+}
+
+.intro-gender-buttons.visible {
+  display: flex;
+}
+
+.intro-gender-btn {
+  flex: 1;
+  padding: 16px 12px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  border: 2px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.intro-gender-btn:hover {
+  border-color: var(--accent);
+  background: #f0fdf4;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(22,163,74,0.15);
+}
+
+.intro-gender-btn:active {
+  transform: translateY(0);
+}
+
+.intro-gender-icon {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.intro-gender-label {
+  font-size: 15px;
+}
+
+/* ===== 风格选择 ===== */
+.intro-style-buttons {
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 320px;
+  align-items: center;
+}
+
+.intro-style-buttons.visible {
+  display: flex;
+}
+
+.intro-style-title {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.intro-style-btn {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  border: 2px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+}
+
+.intro-style-btn:hover {
+  border-color: var(--accent);
+  background: #f0fdf4;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(22,163,74,0.15);
+}
+
+.intro-style-btn:active {
+  transform: translateY(0);
+}
+
+.intro-style-icon {
+  font-size: 28px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.intro-style-label {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.intro-style-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-left: auto;
+}

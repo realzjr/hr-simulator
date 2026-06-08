@@ -1,0 +1,292 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f2ece0"/>
+      <stop offset="100%" stop-color="#e8e0d0"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#b5976e"/>
+      <stop offset="100%" stop-color="#987550"/>
+    </linearGradient>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7ec8e3"/>
+      <stop offset="60%" stop-color="#aedcee"/>
+      <stop offset="100%" stop-color="#d0eaf4"/>
+    </linearGradient>
+    <linearGradient id="tabletop" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7a6245"/>
+      <stop offset="12%" stop-color="#917858"/>
+      <stop offset="50%" stop-color="#a8906e"/>
+      <stop offset="88%" stop-color="#917858"/>
+      <stop offset="100%" stop-color="#7a6245"/>
+    </linearGradient>
+    <linearGradient id="tableside" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6d5638"/>
+      <stop offset="100%" stop-color="#503c22"/>
+    </linearGradient>
+    <linearGradient id="chairLeather" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#404040"/>
+      <stop offset="40%" stop-color="#4d4d4d"/>
+      <stop offset="100%" stop-color="#353535"/>
+    </linearGradient>
+    <linearGradient id="chairSeat" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#484848"/>
+      <stop offset="100%" stop-color="#3a3a3a"/>
+    </linearGradient>
+    <radialGradient id="ceilingLight" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="rgba(255,250,230,0.45)"/>
+      <stop offset="100%" stop-color="rgba(255,250,230,0)"/>
+    </radialGradient>
+    <radialGradient id="ambientWarm" cx="0.45" cy="0.3" r="0.7">
+      <stop offset="0%" stop-color="rgba(255,245,220,0.15)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,0)"/>
+    </radialGradient>
+    <!-- Wood grain filter -->
+    <filter id="woodGrain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04 0.3" numOctaves="4" seed="3" result="noise"/>
+      <feColorMatrix type="saturate" values="0" in="noise" result="gray"/>
+      <feBlend in="SourceGraphic" in2="gray" mode="soft-light"/>
+    </filter>
+  </defs>
+
+  <!-- ======== WALLS ======== -->
+  <rect width="800" height="420" fill="url(#wall)"/>
+  <!-- Subtle wall texture -->
+  <rect width="800" height="420" fill="rgba(200,190,170,0.06)"/>
+
+  <!-- Wall panel trim line -->
+  <line x1="0" y1="210" x2="800" y2="210" stroke="#d8cfc0" stroke-width="1" opacity="0.4"/>
+
+  <!-- Baseboard -->
+  <rect x="0" y="400" width="800" height="20" fill="#b8a888" opacity="0.5"/>
+  <line x1="0" y1="400" x2="800" y2="400" stroke="#a89878" stroke-width="2" opacity="0.5"/>
+  <line x1="0" y1="420" x2="800" y2="420" stroke="#c8b898" stroke-width="1" opacity="0.3"/>
+
+  <!-- ======== FLOOR ======== -->
+  <rect x="0" y="420" width="800" height="180" fill="url(#floor)"/>
+  <!-- Floor planks -->
+  <g opacity="0.3" stroke="#8a6c48" stroke-width="0.6">
+    <line x1="0" y1="455" x2="800" y2="455"/>
+    <line x1="0" y1="490" x2="800" y2="490"/>
+    <line x1="0" y1="525" x2="800" y2="525"/>
+    <line x1="0" y1="560" x2="800" y2="560"/>
+    <line x1="133" y1="420" x2="133" y2="600"/>
+    <line x1="267" y1="420" x2="267" y2="600"/>
+    <line x1="400" y1="420" x2="400" y2="600"/>
+    <line x1="533" y1="420" x2="533" y2="600"/>
+    <line x1="667" y1="420" x2="667" y2="600"/>
+  </g>
+  <!-- Floor reflection -->
+  <rect x="0" y="420" width="800" height="40" fill="rgba(255,255,255,0.04)"/>
+
+  <!-- ======== LARGE WINDOW (right wall) ======== -->
+  <!-- Window frame -->
+  <rect x="500" y="50" width="250" height="300" rx="2" fill="#5e4e3e" stroke="#4a3c2e" stroke-width="4"/>
+  <!-- Glass panes -->
+  <rect x="510" y="60" width="112" height="140" fill="url(#sky)"/>
+  <rect x="630" y="60" width="112" height="140" fill="url(#sky)"/>
+  <rect x="510" y="208" width="112" height="132" fill="url(#sky)" opacity="0.9"/>
+  <rect x="630" y="208" width="112" height="132" fill="url(#sky)" opacity="0.9"/>
+  <!-- Window mullions -->
+  <rect x="500" y="196" width="250" height="10" fill="#5e4e3e"/>
+  <rect x="622" y="50" width="8" height="300" fill="#5e4e3e"/>
+  <!-- Window sill -->
+  <rect x="490" y="350" width="270" height="14" rx="2" fill="#6e5e4e" stroke="#4a3c2e" stroke-width="1"/>
+  <!-- Buildings through window -->
+  <rect x="525" y="120" width="30" height="80" fill="#95a5b5" opacity="0.5" rx="1"/>
+  <rect x="562" y="95" width="22" height="105" fill="#88a0b0" opacity="0.4" rx="1"/>
+  <rect x="645" y="105" width="35" height="95" fill="#90a8b8" opacity="0.45" rx="1"/>
+  <rect x="690" y="130" width="24" height="70" fill="#85a0b0" opacity="0.35" rx="1"/>
+  <rect x="720" y="110" width="16" height="90" fill="#8898a8" opacity="0.3" rx="1"/>
+  <!-- Building windows -->
+  <g fill="rgba(255,255,200,0.3)">
+    <rect x="530" y="130" width="5" height="5" rx="0.5"/>
+    <rect x="540" y="130" width="5" height="5" rx="0.5"/>
+    <rect x="530" y="145" width="5" height="5" rx="0.5"/>
+    <rect x="540" y="145" width="5" height="5" rx="0.5"/>
+    <rect x="530" y="160" width="5" height="5" rx="0.5"/>
+    <rect x="650" y="120" width="6" height="5" rx="0.5"/>
+    <rect x="660" y="120" width="6" height="5" rx="0.5"/>
+    <rect x="670" y="120" width="6" height="5" rx="0.5"/>
+    <rect x="650" y="140" width="6" height="5" rx="0.5"/>
+    <rect x="660" y="140" width="6" height="5" rx="0.5"/>
+  </g>
+  <!-- Clouds -->
+  <ellipse cx="570" cy="78" rx="30" ry="12" fill="white" opacity="0.55"/>
+  <ellipse cx="700" cy="70" rx="22" ry="9" fill="white" opacity="0.45"/>
+  <ellipse cx="640" cy="85" rx="16" ry="7" fill="white" opacity="0.35"/>
+  <!-- Curtain left -->
+  <path d="M505 55 C495 150 498 250 502 348" stroke="none" fill="#cfc0a8" opacity="0.45"/>
+  <path d="M500 55 C490 150 494 250 498 348" stroke="none" fill="#c0b090" opacity="0.35"/>
+  <!-- Curtain right -->
+  <path d="M745 55 C755 150 752 250 748 348" stroke="none" fill="#cfc0a8" opacity="0.45"/>
+  <path d="M750 55 C760 150 756 250 752 348" stroke="none" fill="#c0b090" opacity="0.35"/>
+  <!-- Light on window sill -->
+  <rect x="620" y="342" width="18" height="10" rx="2" fill="rgba(255,255,255,0.3)"/>
+
+  <!-- ======== WHITEBOARD (left wall) ======== -->
+  <rect x="50" y="70" width="220" height="150" rx="3" fill="#fafafa" stroke="#bbb" stroke-width="2.5"/>
+  <rect x="50" y="70" width="220" height="18" rx="3" fill="#e0e0e0"/>
+  <!-- Board content -->
+  <line x1="75" y1="110" x2="230" y2="110" stroke="#c5c5c5" stroke-width="2"/>
+  <line x1="75" y1="132" x2="210" y2="132" stroke="#c5c5c5" stroke-width="2"/>
+  <line x1="75" y1="154" x2="190" y2="154" stroke="#c5c5c5" stroke-width="2"/>
+  <line x1="75" y1="176" x2="150" y2="176" stroke="#d5d5d5" stroke-width="1.5"/>
+  <!-- Board tray -->
+  <rect x="90" y="220" width="160" height="7" rx="2" fill="#bbb"/>
+  <rect x="130" y="215" width="35" height="5" rx="2" fill="#3060b0"/>
+  <rect x="175" y="215" width="30" height="5" rx="2" fill="#c03030"/>
+
+  <!-- ======== WALL CLOCK ======== -->
+  <circle cx="400" cy="100" r="28" fill="#f8f8f0" stroke="#888" stroke-width="2.5"/>
+  <circle cx="400" cy="100" r="2.5" fill="#555"/>
+  <!-- Clock hands -->
+  <line x1="400" y1="100" x2="400" y2="80" stroke="#444" stroke-width="2" stroke-linecap="round"/>
+  <line x1="400" y1="100" x2="415" y2="95" stroke="#444" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="400" y1="100" x2="420" y2="103" stroke="#c03030" stroke-width="0.8" stroke-linecap="round"/>
+  <!-- Clock ticks -->
+  <g stroke="#888" stroke-width="1.2">
+    <line x1="400" y1="75" x2="400" y2="79"/>
+    <line x1="400" y1="121" x2="400" y2="125"/>
+    <line x1="375" y1="100" x2="379" y2="100"/>
+    <line x1="421" y1="100" x2="425" y2="100"/>
+  </g>
+
+  <!-- ======== CONFERENCE TABLE ======== -->
+  <!-- Table top (perspective) -->
+  <path d="M180 380 L620 380 L670 445 L130 445 Z" fill="url(#tabletop)" filter="url(#woodGrain)"/>
+  <path d="M185 382 L615 382" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+  <!-- Table front face -->
+  <path d="M130 445 L670 445 L670 462 L130 462 Z" fill="url(#tableside)"/>
+  <!-- Table legs -->
+  <rect x="175" y="462" width="14" height="60" rx="2" fill="#503c22"/>
+  <rect x="611" y="462" width="14" height="60" rx="2" fill="#503c22"/>
+  <!-- Table shadow on floor -->
+  <ellipse cx="400" cy="525" rx="280" ry="12" fill="rgba(0,0,0,0.06)"/>
+
+  <!-- ======== ITEMS ON TABLE ======== -->
+  <!-- Paper stack left -->
+  <rect x="240" y="374" width="45" height="35" rx="1" fill="#fff" stroke="#ddd" stroke-width="0.6" transform="rotate(-4 262 391)" opacity="0.85"/>
+  <rect x="244" y="372" width="45" height="35" rx="1" fill="#fff" stroke="#ddd" stroke-width="0.6" transform="rotate(2 266 389)" opacity="0.9"/>
+  <line x1="254" y1="381" x2="282" y2="381" stroke="#e0e0e0" stroke-width="0.8"/>
+  <line x1="254" y1="388" x2="278" y2="388" stroke="#e0e0e0" stroke-width="0.8"/>
+  <line x1="254" y1="395" x2="274" y2="395" stroke="#e5e5e5" stroke-width="0.8"/>
+
+  <!-- Pen -->
+  <rect x="310" y="390" width="50" height="3.5" rx="1.5" fill="#1a4080" transform="rotate(-6 335 391)"/>
+  <rect x="307" y="389" width="7" height="5" rx="1" fill="#102860" transform="rotate(-6 310 391)"/>
+
+  <!-- Laptop center -->
+  <g transform="translate(370, 365)">
+    <path d="M0 0 L80 0 L78 -48 L2 -48 Z" fill="#2a2a2a" stroke="#1a1a1a" stroke-width="1"/>
+    <path d="M5 -44 L75 -44 L73 -4 L7 -4 Z" fill="#2860a8" opacity="0.45"/>
+    <!-- Screen content lines -->
+    <line x1="14" y1="-35" x2="55" y2="-35" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
+    <line x1="14" y1="-27" x2="48" y2="-27" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+    <line x1="14" y1="-19" x2="42" y2="-19" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+    <path d="M-8 0 L88 0 L93 14 L-13 14 Z" fill="#c4c4c4" stroke="#aaa" stroke-width="0.5"/>
+    <!-- Trackpad -->
+    <rect x="28" y="3" width="24" height="8" rx="1" fill="#b0b0b0" opacity="0.5"/>
+  </g>
+
+  <!-- Water glass right -->
+  <g transform="translate(510, 368)">
+    <path d="M0 10 L4 38 L26 38 L30 10 Z" fill="rgba(200,228,255,0.35)" stroke="rgba(170,200,230,0.5)" stroke-width="0.8"/>
+    <ellipse cx="15" cy="10" rx="15" ry="5" fill="rgba(200,228,255,0.25)" stroke="rgba(170,200,230,0.45)" stroke-width="0.8"/>
+    <path d="M3 22 L5 36 L25 36 L27 22 Z" fill="rgba(140,190,240,0.3)"/>
+  </g>
+
+  <!-- Coffee mug left -->
+  <g transform="translate(200, 378)">
+    <rect x="0" y="0" width="18" height="20" rx="2" fill="#f5f0e5" stroke="#c8b898" stroke-width="1"/>
+    <ellipse cx="9" cy="0" rx="9" ry="3.5" fill="#e8e0d0" stroke="#c8b898" stroke-width="0.8"/>
+    <!-- Handle -->
+    <path d="M18 5 Q26 5 26 12 Q26 18 18 18" fill="none" stroke="#c8b898" stroke-width="1.5"/>
+    <!-- Steam -->
+    <path d="M6 -5 Q4 -12 8 -16" fill="none" stroke="rgba(200,200,200,0.4)" stroke-width="1"/>
+    <path d="M12 -5 Q14 -14 10 -18" fill="none" stroke="rgba(200,200,200,0.3)" stroke-width="1"/>
+  </g>
+
+  <!-- ======== CHAIRS ======== -->
+  <!-- Left chair (interviewer side) -->
+  <g transform="translate(90, 350)">
+    <path d="M-8 -55 Q25 -75 58 -55 L55 25 Q25 35 -5 25 Z" fill="url(#chairLeather)" opacity="0.88"/>
+    <g stroke="rgba(80,80,80,0.25)" stroke-width="0.6">
+      <line x1="8" y1="-35" x2="8" y2="15"/>
+      <line x1="25" y1="-40" x2="25" y2="20"/>
+      <line x1="42" y1="-35" x2="42" y2="15"/>
+    </g>
+    <ellipse cx="25" cy="30" rx="38" ry="14" fill="url(#chairSeat)" opacity="0.88"/>
+    <rect x="21" y="44" width="8" height="35" fill="#555" rx="2"/>
+    <ellipse cx="25" cy="82" rx="28" ry="6" fill="#444" opacity="0.55"/>
+    <!-- Armrest -->
+    <rect x="-12" y="10" width="10" height="5" rx="2" fill="#505050" opacity="0.7"/>
+    <rect x="52" y="10" width="10" height="5" rx="2" fill="#505050" opacity="0.7"/>
+  </g>
+
+  <!-- Right chair (candidate side) -->
+  <g transform="translate(640, 350)">
+    <path d="M58 -55 Q25 -75 -8 -55 L-5 25 Q25 35 55 25 Z" fill="url(#chairLeather)" opacity="0.88"/>
+    <g stroke="rgba(80,80,80,0.25)" stroke-width="0.6">
+      <line x1="8" y1="-35" x2="8" y2="15"/>
+      <line x1="25" y1="-40" x2="25" y2="20"/>
+      <line x1="42" y1="-35" x2="42" y2="15"/>
+    </g>
+    <ellipse cx="25" cy="30" rx="38" ry="14" fill="url(#chairSeat)" opacity="0.88"/>
+    <rect x="21" y="44" width="8" height="35" fill="#555" rx="2"/>
+    <ellipse cx="25" cy="82" rx="28" ry="6" fill="#444" opacity="0.55"/>
+    <rect x="-12" y="10" width="10" height="5" rx="2" fill="#505050" opacity="0.7"/>
+    <rect x="52" y="10" width="10" height="5" rx="2" fill="#505050" opacity="0.7"/>
+  </g>
+
+  <!-- ======== BOOKSHELF (far left) ======== -->
+  <g transform="translate(20, 250)">
+    <rect x="0" y="0" width="55" height="120" fill="#7a6548" stroke="#5c4a32" stroke-width="1.5" rx="2"/>
+    <!-- Shelves -->
+    <line x1="2" y1="30" x2="53" y2="30" stroke="#5c4a32" stroke-width="1.5"/>
+    <line x1="2" y1="60" x2="53" y2="60" stroke="#5c4a32" stroke-width="1.5"/>
+    <line x1="2" y1="90" x2="53" y2="90" stroke="#5c4a32" stroke-width="1.5"/>
+    <!-- Books -->
+    <rect x="5" y="5" width="8" height="23" rx="1" fill="#c03030" opacity="0.7"/>
+    <rect x="14" y="8" width="7" height="20" rx="1" fill="#2060a0" opacity="0.7"/>
+    <rect x="22" y="6" width="9" height="22" rx="1" fill="#208040" opacity="0.65"/>
+    <rect x="32" y="9" width="6" height="19" rx="1" fill="#a08020" opacity="0.6"/>
+    <rect x="39" y="5" width="10" height="23" rx="1" fill="#604080" opacity="0.65"/>
+    <rect x="5" y="35" width="10" height="23" rx="1" fill="#a06020" opacity="0.65"/>
+    <rect x="16" y="38" width="8" height="20" rx="1" fill="#306080" opacity="0.65"/>
+    <rect x="26" y="36" width="7" height="22" rx="1" fill="#804040" opacity="0.6"/>
+    <rect x="35" y="34" width="12" height="24" rx="1" fill="#206040" opacity="0.65"/>
+    <!-- Decorative item -->
+    <circle cx="15" cy="75" r="6" fill="#d0c0a0" opacity="0.5"/>
+    <rect x="30" y="68" width="16" height="20" rx="1" fill="#e0d8c0" opacity="0.5"/>
+  </g>
+
+  <!-- ======== PLANT (right corner) ======== -->
+  <g transform="translate(740, 360)">
+    <!-- Pot -->
+    <path d="M-12 30 L-8 60 L28 60 L32 30 Z" fill="#a06030" stroke="#804820" stroke-width="1"/>
+    <ellipse cx="10" cy="30" rx="22" ry="6" fill="#b07040" stroke="#804820" stroke-width="0.8"/>
+    <!-- Leaves -->
+    <path d="M10 28 Q-5 0 -15 -15 Q-5 -10 10 20" fill="#3a8848" opacity="0.8"/>
+    <path d="M10 25 Q20 -5 35 -20 Q25 -10 10 18" fill="#4a9858" opacity="0.75"/>
+    <path d="M10 22 Q-10 -10 -20 -30 Q-8 -20 10 15" fill="#358040" opacity="0.7"/>
+    <path d="M10 20 Q30 -15 25 -35 Q20 -18 10 12" fill="#409050" opacity="0.72"/>
+    <path d="M10 26 Q0 5 -8 -8 Q0 0 10 20" fill="#50a060" opacity="0.65"/>
+  </g>
+
+  <!-- ======== CEILING ======== -->
+  <!-- Ceiling light fixture -->
+  <rect x="340" y="0" width="120" height="10" fill="#ddd" rx="3"/>
+  <rect x="375" y="10" width="50" height="18" fill="#eee" stroke="#ccc" stroke-width="0.8" rx="3"/>
+  <!-- Light glow -->
+  <ellipse cx="400" cy="35" rx="80" ry="40" fill="url(#ceilingLight)"/>
+
+  <!-- ======== AMBIENT OVERLAYS ======== -->
+  <rect width="800" height="600" fill="url(#ambientWarm)"/>
+
+  <!-- Window light cast on floor -->
+  <path d="M520 420 L680 420 L720 530 L480 530 Z" fill="rgba(255,250,230,0.06)"/>
+
+  <!-- Subtle vignette -->
+  <rect width="800" height="600" fill="none" stroke="rgba(0,0,0,0.06)" stroke-width="80"/>
+</svg>
