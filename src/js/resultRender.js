@@ -253,6 +253,9 @@ function renderResult() {
           <button class="btn btn-outline log-copy-btn" id="btn-copy-log">📋 复制日志</button>
         </div>
         <pre class="log-viewer-body" id="log-viewer-body"></pre>
+        <p id="log-viewer-email" style="display:none;text-align:center;margin-top:12px;color:#94a3b8;font-size:13px;">
+          📧 反馈请发送日志到：<a href="mailto:3150641163@qq.com" style="color:#60a5fa;">3150641163@qq.com</a>
+        </p>
       </div>
     </div>
   `;
@@ -282,7 +285,7 @@ function renderResult() {
     // 生成QR码
     const qrImg = document.getElementById('share-card-qr-1');
     if (qrImg && !qrImg.src) {
-      const url = _generateQRDataUrl(window.location.href.split('?')[0], 3);
+      const url = _generateQRDataUrl('https://realzjr.github.io/hr-simulator/', 3);
       if (url) { qrImg.src = url; }
       else { const sec = qrImg.closest('.share-card-qr-section'); if (sec) sec.style.display = 'none'; }
     }
@@ -314,6 +317,7 @@ function renderResult() {
   document.getElementById('btn-bug-feedback').addEventListener('click', () => {
     const overlay = document.getElementById('log-viewer-overlay');
     const body = document.getElementById('log-viewer-body');
+    const emailHint = document.getElementById('log-viewer-email');
 
     // 汇总日志
     let logText = '=== HR模拟器 游戏日志 ===\n';
@@ -335,6 +339,7 @@ function renderResult() {
     logText += GameLog.getText() || '（无日志）';
 
     body.textContent = logText;
+    if (emailHint) emailHint.style.display = 'block';
     overlay.classList.add('visible');
   });
 
@@ -647,6 +652,9 @@ function renderForcedGameOver(container) {
           <button class="btn btn-outline log-copy-btn" id="btn-copy-log">📋 复制日志</button>
         </div>
         <pre class="log-viewer-body" id="log-viewer-body"></pre>
+        <p id="log-viewer-email" style="display:none;text-align:center;margin-top:12px;color:#94a3b8;font-size:13px;">
+          📧 反馈请发送日志到：<a href="mailto:3150641163@qq.com" style="color:#60a5fa;">3150641163@qq.com</a>
+        </p>
       </div>
     </div>
   `;
@@ -661,7 +669,7 @@ function renderForcedGameOver(container) {
   document.getElementById('btn-share-card').addEventListener('click', () => {
     const qrImg = document.getElementById('share-card-qr-2');
     if (qrImg && !qrImg.src) {
-      const url = _generateQRDataUrl(window.location.href.split('?')[0], 3);
+      const url = _generateQRDataUrl('https://realzjr.github.io/hr-simulator/', 3);
       if (url) { qrImg.src = url; }
       else { const sec = qrImg.closest('.share-card-qr-section'); if (sec) sec.style.display = 'none'; }
     }
@@ -693,6 +701,7 @@ function renderForcedGameOver(container) {
   document.getElementById('btn-bug-feedback').addEventListener('click', () => {
     const overlay = document.getElementById('log-viewer-overlay');
     const body = document.getElementById('log-viewer-body');
+    const emailHint = document.getElementById('log-viewer-email');
 
     let logText = '=== HR模拟器 游戏日志（强制毕业）===\n';
     logText += `时间: ${new Date().toLocaleString()}\n`;
@@ -704,6 +713,7 @@ function renderForcedGameOver(container) {
     logText += GameLog.getText() || '（无日志）';
 
     body.textContent = logText;
+    if (emailHint) emailHint.style.display = 'block';
     overlay.classList.add('visible');
   });
 
