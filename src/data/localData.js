@@ -4,7 +4,7 @@
  * styles[styleKey] = { counterQuestions, negotiations }
  * 由 generate_data.py + generate_styles.py 自动生成
  */
-const LOCAL_DATA = {
+var LOCAL_DATA = {
   0: {
   "candidates": {
     "great": [
