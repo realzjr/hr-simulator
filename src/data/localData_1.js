@@ -1,5 +1,5 @@
-// HR模拟器 - JD1 离线数据 (lazy loaded)
-var LOCAL_DATA_1 = {1: {
+// HR模拟器 JD1
+var LOCAL_DATA_1 = {
   "candidates": {
     "great": [
       {
@@ -2858,4 +2858,5 @@ var LOCAL_DATA_1 = {1: {
         ]
       }
     }
-  }};
+  }
+};

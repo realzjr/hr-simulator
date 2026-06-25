@@ -464,7 +464,17 @@ async function startGame() {
 
   // 本地模式：按需加载JD数据
   if (GameState.mode === 'local' && savedJDIndex >= 0) {
-    try { await LDS.load(savedJDIndex); } catch(e) { console.warn('数据加载失败:', e); }
+    await new Promise(function(resolve, reject) {
+      if (LOCAL_DATA[savedJDIndex]) return resolve();
+      var s = document.createElement('script');
+      s.src = 'data/localData_' + savedJDIndex + '.js';
+      s.onload = function() {
+        LOCAL_DATA[savedJDIndex] = window['LOCAL_DATA_' + savedJDIndex];
+        resolve();
+      };
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
   }
 
   // 切换到加载场景
