@@ -13,7 +13,7 @@ var LDS = {
       var s = document.createElement('script');
       s.src = 'data/localData_' + jdIndex + '.js';
       s.onload = function() {
-        LOCAL_DATA[jdIndex] = window['LOCAL_DATA_' + jdIndex];
+        LOCAL_DATA[jdIndex] = window['LOCAL_DATA_' + jdIndex][jdIndex];
         delete window['LOCAL_DATA_' + jdIndex];
         self._loaded[jdIndex] = true;
         resolve(LOCAL_DATA[jdIndex]);
