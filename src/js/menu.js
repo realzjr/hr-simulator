@@ -462,6 +462,11 @@ async function startGame() {
   GameState.currentJDIndex = savedJDIndex;
   GameState.currentJD = jd;
 
+  // 本地模式：按需加载JD数据
+  if (GameState.mode === 'local' && savedJDIndex >= 0) {
+    try { await LDS.load(savedJDIndex); } catch(e) { console.warn('数据加载失败:', e); }
+  }
+
   // 切换到加载场景
   switchScene('loading');
   renderLoadingScene();
